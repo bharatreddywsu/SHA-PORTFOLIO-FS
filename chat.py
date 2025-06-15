@@ -48,21 +48,22 @@ qa_chain = RetrievalQA.from_chain_type(
 # --- Handler functions ---
 def handle_fun(q: str) -> Optional[str]:
     if any(w in q for w in ["girlfriend", "relationship", "single", "wife", "crush"]):
-        return "Haha, that’s classified! Bharat is more in love with data pipelines than dating apps."
+        return "Haha, that’s classified! Bharat is more in love with Spring Boot than dating apps."
     if "favorite food" in q:
-        return "He runs on JSON, chai, and weekend biryani—strictly in that order."
+        return "He runs on Java, React, and a weekly dose of biryani."
     if "age" in q:
-        return "Age is just metadata—especially if there’s no timestamp 😉."
+        return "Age is just metadata—unless it’s part of the API response 😉."
     if any(w in q for w in ["hobbies", "free time", "weekend"]):
-        return "Debugging tricky pipelines, reading AI papers, and sharing memes with fellow engineers."
+        return "Coding personal projects, diving into cloud architecture, or building something cool with React and Spring Boot."
     if "fruit" in q:
-        return "I’d be a pineapple—tough exterior, sweet insights inside."
+        return "Probably a mango—clean APIs on the outside, rich layers underneath."
     if "island" in q:
-        return "I’d build a coconut-powered server farm and live off solar CPU cycles."
+        return "Set up a self-hosted Kubernetes cluster and code with ocean views."
     if "emoji" in q:
-        return "🤖—because I’m building AI side-kicks for people."
+        return "💻—because I live in the terminal."
+    if "favorite framework" in q:
+        return "Spring Boot on the backend, ReactJS on the frontend—power couple of the stack."
     return None
-
 
 def handle_recruiter(q: str) -> Optional[str]:
     if any(w in q for w in ["sponsorship", "visa", "work authorization"]):
@@ -78,79 +79,77 @@ def handle_recruiter(q: str) -> Optional[str]:
         return "I’m open to remote, hybrid, or relocation—whatever works best for the team."
     return None
 
-
 def handle_company(q: str) -> Optional[str]:
     if any(t in q for t in ["current company", "working now"]):
-        return "I’m currently at **KLA** as a Data Engineer since May 2024."
+        return "I’m currently at Comcast as a Full Stack Developer (June 2024–Present)."
+    if "jpmorgan" in q or "jpmc" in q:
+        return (
+            "At JPMorgan Chase (Feb 2023–May 2024), I built microservices with Java/Spring Boot, "
+            "React-based SPAs, and AWS-integrated backend utilities."
+        )
     if "dentsu" in q:
         return (
-            "At Dentsu (May 2020–May 2022), I built pipelines with ADF, Spark, Kafka, and Power BI. "
-            "RAG/LLM tech wasn’t in scope then."
+            "At Dentsu (May 2020–May 2022), I modernized healthcare apps using Spring Boot, Angular, and Azure."
         )
     if any(t in q for t in ["wichita state", "master’s", "mscs"]):
-        return "Completed my Master’s in CS at Wichita State University (Aug 2022–May 2024)."
-    if "fagron" in q:
-        return (
-            "At Fagron (Dec 2022–Apr 2024), I built HIPAA-compliant ETL on AWS Glue & Redshift, "
-            "and introduced a light-based verification system post-production."
-        )
+        return "Completed my Master’s in Computer Science at Wichita State University (Aug 2022–May 2024)."
     return None
-
 
 def handle_tech(q: str) -> Optional[str]:
-    if any(k in q for k in ["rag", "retrieval augmented generation"]):
-        return "I set up FAISS + OpenAI embeddings at KLA for wafer-defect Q&A."
-    if any(k in q for k in ["llm", "large language model"]):
-        return "I use LLMs in Databricks for code suggestions, debugging, and contextual Q&A."
-    if "airflow" in q:
-        return "I built DAGs with sensors, retries, SLA alerts, and email notifications."
-    if any(k in q for k in ["kafka", "streaming"]):
-        return "I’ve written PySpark Structured Streaming consumers with exactly-once semantics."
+    if "spring boot" in q or "java" in q:
+        return "I build scalable backends using Java 17, Spring Boot, JPA, and Microservices architecture."
+    if "react" in q or "reactjs" in q:
+        return "I build responsive UIs using ReactJS, Redux, and component-driven architecture."
+    if "aws" in q:
+        return "I deploy microservices to AWS EC2, Lambda, SQS, and RDS—containerized with Docker."
+    if "docker" in q or "kubernetes" in q:
+        return "I use Docker & Kubernetes to containerize and orchestrate backend services."
+    if any(k in q for k in ["ci/cd", "jenkins", "github"]):
+        return "I build CI/CD pipelines with Jenkins, GitHub, and Docker for automated deployments."
     return None
-
 
 def handle_education(q: str) -> Optional[str]:
     if any(w in q for w in ["master", "wichita state"]):
-        return "Master’s in CS from Wichita State University (Aug 2022–May 2024)."
+        return "Master’s in Computer Science from Wichita State University (Aug 2022–May 2024)."
     if "bachelor" in q:
         return "Bachelor’s in Engineering (CS) in 2018 with early Python/OpenCV projects."
     if any(w in q for w in ["certification", "certified"]):
-        return "Certs: AWS Solutions Architect, Databricks Data Engineer, Snowflake Data Engineer, Python & SQL."
+        return (
+            "Certifications include: AWS Developer Associate, Microsoft Power BI, "
+            "Oracle Certified Professional, and Java Certified Programmer."
+        )
     return None
 
-
 def handle_projects(q: str) -> Optional[str]:
-    if any(w in q for w in ["sawyer", "pybullet"]):
-        return "Built a Sawyer Arm sim in PyBullet (Jan–Mar 2023) with IK and reward-based grasp tests."
+    if "loan" in q or "management system" in q:
+        return (
+            "At Comcast, I developed a scalable Loan Management System using Spring Boot, ReactJS, and AWS Lambda, "
+            "reducing processing time by 25%."
+        )
     if any(w in q for w in ["face recognition", "raspberry pi"]):
         return "Developed a Pi-based face-recognition system using OpenCV (2018)."
     return None
-
 
 def handle_volunteer(q: str) -> Optional[str]:
     if any(w in q for w in ["guinness", "wheelchair"]):
         return "Coordinated a Guinness World Record wheelchair event at Vel Tech (May 2019)."
     return None
 
-
 def handle_behavioral(q: str) -> Optional[str]:
     if any(w in q for w in ["tell me about a time", "example of", "how did you"]):
-        return "Sure—want a pipeline optimization story or a leadership example?"
+        return "Sure—want a system optimization story or a leadership example from my time at JPMorgan?"
     return None
 
-
+# --- Main response function ---
 def get_response(user_input: str) -> str:
     q = user_input.lower()
-    # Try each handler
     for fn in [handle_fun, handle_recruiter, handle_company,
                handle_tech, handle_education, handle_projects,
                handle_volunteer, handle_behavioral]:
         resp = fn(q)
         if resp:
             return resp
-    # Fallback to RAG
     docs = store.as_retriever().get_relevant_documents(user_input)
     if docs:
         return qa_chain.run(user_input)
-    # Final funny fallback
     return "My circuits are tickled—but I don’t have that one yet! Try another question 😊"
