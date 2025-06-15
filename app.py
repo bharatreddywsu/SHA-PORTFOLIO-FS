@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 # Page config must be the first Streamlit command
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="SHA — Bharat’s AI Assistant",
-    page_icon="👩‍🚀",
+    page_title="Bharat Reddy — Full Stack Portfolio Assistant",
+    page_icon="💡",
     layout="centered",
 )
 
@@ -19,7 +19,7 @@ OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 # ─────────────────────────────────────────────────────────────────────────────
 # Import your response logic
 # ─────────────────────────────────────────────────────────────────────────────
-from chat import get_response
+from fullstack_qa import get_response  # make sure to rename your main logic file to `fullstack_qa.py`
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Avatar display
@@ -34,7 +34,8 @@ def show_sha_avatar():
             <div style='text-align:center; margin-bottom:15px;'>
                 <img src="data:image/png;base64,{encoded}" width="120"
                      style="border-radius:50%; box-shadow:0 0 15px #7F5AF0;">
-                <h2 style='color:#E0E0E0; margin-top:10px;'>SHA — Bharat's Companion</h2>
+                <h2 style='color:#E0E0E0; margin-top:10px;'>Bharat's Full Stack Assistant</h2>
+                <p style='color:#AAAAAA;'>Ask me about his skills, projects, work, or fun facts!</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -43,7 +44,7 @@ def show_sha_avatar():
 show_sha_avatar()
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Custom CSS for cosmic theme
+# Custom CSS for theme
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown(
     """
@@ -74,7 +75,7 @@ st.markdown(
     """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Initialize miss_count for fallback logic
+# Initialize session
 # ─────────────────────────────────────────────────────────────────────────────
 if "miss_count" not in st.session_state:
     st.session_state["miss_count"] = 0
@@ -82,16 +83,16 @@ if "miss_count" not in st.session_state:
 # ─────────────────────────────────────────────────────────────────────────────
 # Main Chat UI
 # ─────────────────────────────────────────────────────────────────────────────
-st.markdown("#### Ask SHA anything about Bharat 👇")
+st.markdown("#### 🤔 Ask something about Bharat’s full stack journey:")
 user_input = st.text_input("Your Question:", key="main_input")
 
 if user_input:
-    with st.spinner("SHA is thinking..."):
+    with st.spinner("Analyzing stack traces..."):
         response = get_response(user_input)
-        st.markdown(f"**SHA:** {response}")
+        st.markdown(f"**Assistant:** {response}")
 
     # Feedback buttons
-    st.markdown("#### Was this helpful?")
+    st.markdown("#### Was this answer helpful?")
     col1, col2 = st.columns(2)
     if col1.button("👍", key="like_button"):
         with open("questions_log.txt", "a") as f:
@@ -105,6 +106,6 @@ if user_input:
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("<hr/>", unsafe_allow_html=True)
 st.markdown(
-    "<center><small>🤖 Powered by SHA — Bharat’s AI Assistant (v3.0)</small></center>",
+    "<center><small>🚀 Powered by LangChain + OpenAI · Built by Bharat Reddy</small></center>",
     unsafe_allow_html=True
 )
