@@ -16,7 +16,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 # Page config
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="SHA — Bharat’s Full Stack Assistant",
+    page_title="SHA — Bharat’s Web Dev Assistant",
     page_icon="💻",
     layout="centered",
 )
@@ -35,7 +35,7 @@ def show_avatar():
             <div style='text-align:center; margin-bottom:15px;'>
                 <img src="data:image/png;base64,{encoded}" width="120"
                      style="border-radius:50%; box-shadow:0 0 15px #7F5AF0;">
-                <h2 style='color:#E0E0E0; margin-top:10px;'>SHA — Bharat’s Full Stack Assistant</h2>
+                <h2 style='color:#E0E0E0; margin-top:10px;'>SHA — Bharat’s Web Dev Assistant</h2>
             </div>
         """, unsafe_allow_html=True)
 
@@ -92,25 +92,30 @@ qa_chain = RetrievalQA.from_chain_type(
 # ─────────────────────────────────────────────────────────────────────────────
 def handle_fun(q):
     if "food" in q:
-        return "Bharat runs on Java, JSON, and weekend biryani—strictly in that order."
+        return "Bharat runs on Java, JSON, and the occasional biryani."
     if "hobby" in q or "weekend" in q:
-        return "He codes side projects with Spring Boot & React, reads cloud architecture blogs, and loves tech memes."
+        return "He builds side projects with Laravel and React, reads up on cloud tech, and enjoys coding challenges."
     return None
 
 def handle_company(q):
-    if any(x in q for x in ["comcast", "current", "working"]):
-        return "Bharat is currently at Comcast as a Full Stack Developer (since June 2024)."
-    if any(x in q for x in ["jpmorgan", "jpmc"]):
-        return "At JPMorgan Chase, he built secure, high-throughput microservices and React apps (2023–2024)."
-    if "dentsu" in q:
-        return "At Dentsu, he modernized healthcare apps with Spring Boot & Angular on Azure."
+    if any(x in q for x in ["current", "working", "adroit"]):
+        return "Bharat is currently working at Agile Adroit LLC as a Web Developer (since September 2024)."
+    if any(x in q for x in ["fagron", "wichita state", "university job"]):
+        return "At Fagron Sterile Services (Wichita State University), he worked as a Web Developer (Dec 2022 – May 2024), enhancing data visualization and building dynamic web solutions."
+    if "capgemini" in q:
+        return "At Capgemini (2020–2022), Bharat built enterprise-level web applications using Java and Struts, and collaborated on cross-functional Agile teams."
     return None
 
 def handle_education(q):
     if "master" in q:
-        return "He completed his Master’s in CS from Wichita State University (Aug 2022–May 2024)."
-    if "certification" in q:
-        return "Certifications include: AWS Developer, Oracle Java Programmer, Power BI Analyst."
+        return "He completed his Master’s in Computer Science from Wichita State University in 2024."
+    if "certification" in q or "certifications" in q:
+        return (
+            "Bharat holds certifications in:\n"
+            "- AWS Certified Developer – Associate\n"
+            "- Microsoft Power BI Data Analyst\n"
+            "- Linux Server Management and Security"
+        )
     return None
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -158,4 +163,4 @@ if user_input:
 # Footer
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("<hr/>", unsafe_allow_html=True)
-st.markdown("<center><small>🤖 Powered by SHA — Bharat’s Full Stack Assistant</small></center>", unsafe_allow_html=True)
+st.markdown("<center><small>🤖 Powered by SHA — Bharat’s Web Dev Assistant</small></center>", unsafe_allow_html=True)
