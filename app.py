@@ -28,7 +28,7 @@ OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 # Optional avatar
 # ─────────────────────────────────────────────────────────────────────────────
 def show_avatar():
-    img_path = "bharat.png"
+    img_path = "shaavatar.png"
     if os.path.exists(img_path):
         encoded = base64.b64encode(open(img_path, "rb").read()).decode()
         st.markdown(f"""
