@@ -48,104 +48,98 @@ qa_chain = RetrievalQA.from_chain_type(
 # --- Handler functions ---
 def handle_fun(q: str) -> Optional[str]:
     if any(w in q for w in ["girlfriend", "relationship", "single", "wife", "crush"]):
-        return "Haha, that’s classified! Bharat is more in love with Spring Boot than dating apps."
+        return "Haha, that’s classified! Bharat is more in love with Laravel and clean code than dating apps."
     if "favorite food" in q:
-        return "He runs on Java, React, and a weekly dose of biryani."
+        return "He runs on Java, Laravel, and a weekly dose of biryani."
     if "age" in q:
-        return "Age is just metadata—unless it’s part of the API response 😉."
+        return "Age is just metadata—unless it’s in the schema 😉."
     if any(w in q for w in ["hobbies", "free time", "weekend"]):
-        return "Coding personal projects, diving into cloud architecture, or building something cool with React and Spring Boot."
+        return "Coding personal projects, exploring cloud platforms, or refining UI components in React."
     if "fruit" in q:
-        return "Probably a mango—clean APIs on the outside, rich layers underneath."
+        return "Mango—clean APIs on the outside, rich ORM layers inside."
     if "island" in q:
-        return "Set up a self-hosted Kubernetes cluster and code with ocean views."
+        return "Self-host Laravel on a Pi, deploy to the cloud, and chill by the sea."
     if "emoji" in q:
-        return "💻—because I live in the terminal."
+        return "💻—because that’s where he lives most of the time."
     if "favorite framework" in q:
-        return "Spring Boot on the backend, ReactJS on the frontend—power couple of the stack."
+        return "Laravel and Spring Boot for the backend, ReactJS for the frontend—a powerful combo."
     return None
 
 def handle_recruiter(q: str) -> Optional[str]:
     if any(w in q for w in ["sponsorship", "visa", "work authorization"]):
         return (
-            "Bharat is on STEM OPT, authorized to work in the U.S., married and awaiting H4. "
-            "Future sponsorship can be discussed based on timelines."
+            "Bharat is on STEM OPT and authorized to work in the U.S. Sponsorship can be considered for future roles."
         )
     if "notice period" in q:
-        return "About a 2-week notice—flexible for the right opportunity."
+        return "Typically a 2-week notice, but flexible for the right opportunity."
     if any(w in q for w in ["salary expectation", "current salary", "expected salary"]):
-        return "I’m open and flexible—happy to align on compensation based on role and impact."
+        return "Open to discussion—Bharat values the right role, team, and impact."
     if any(w in q for w in ["relocation", "open to relocation"]):
-        return "I’m open to remote, hybrid, or relocation—whatever works best for the team."
+        return "Open to remote, hybrid, or relocation roles depending on the opportunity."
     return None
 
 def handle_company(q: str) -> Optional[str]:
-    if any(t in q for t in ["current company", "working now"]):
-        return "I’m currently at Comcast as a Full Stack Developer (June 2024–Present)."
-    if "jpmorgan" in q or "jpmc" in q:
-        return (
-            "At JPMorgan Chase (Feb 2023–May 2024), I built microservices with Java/Spring Boot, "
-            "React-based SPAs, and AWS-integrated backend utilities."
-        )
-    if "dentsu" in q:
-        return (
-            "At Dentsu (May 2020–May 2022), I modernized healthcare apps using Spring Boot, Angular, and Azure."
-        )
-    if any(t in q for t in ["wichita state", "master’s", "mscs"]):
-        return "Completed my Master’s in Computer Science at Wichita State University (Aug 2022–May 2024)."
+    if any(t in q for t in ["current company", "working now", "adroit"]):
+        return "Bharat is currently working at Agile Adroit LLC as a Web Developer (since September 2024)."
+    if any(t in q for t in ["fagron", "wichita state", "university job"]):
+        return "He worked at Fagron Sterile Services (Wichita State University) as a Web Developer from Dec 2022 to May 2024."
+    if "capgemini" in q:
+        return "At Capgemini (May 2020–May 2022), Bharat developed enterprise applications using Java, Struts, and SQL databases."
     return None
 
 def handle_tech(q: str) -> Optional[str]:
     if "spring boot" in q or "java" in q:
-        return "I build scalable backends using Java 17, Spring Boot, JPA, and Microservices architecture."
+        return "He builds scalable backends using Java 11+, Spring Boot, and Struts with SQL/Oracle databases."
     if "react" in q or "reactjs" in q:
-        return "I build responsive UIs using ReactJS, Redux, and component-driven architecture."
+        return "Bharat creates responsive UIs with ReactJS and Angular 4, using modern component architecture."
     if "aws" in q:
-        return "I deploy microservices to AWS EC2, Lambda, SQS, and RDS—containerized with Docker."
+        return "He deploys applications on AWS, using services like EC2, RDS, and S3 for hosting and scaling."
     if "docker" in q or "kubernetes" in q:
-        return "I use Docker & Kubernetes to containerize and orchestrate backend services."
+        return "He containerizes applications with Docker and is familiar with deploying to cloud-based infrastructure."
     if any(k in q for k in ["ci/cd", "jenkins", "github"]):
-        return "I build CI/CD pipelines with Jenkins, GitHub, and Docker for automated deployments."
+        return "He manages CI/CD using Git, Bitbucket, and Docker, ensuring reliable, automated deployment pipelines."
     return None
 
 def handle_education(q: str) -> Optional[str]:
     if any(w in q for w in ["master", "wichita state"]):
-        return "Master’s in Computer Science from Wichita State University (Aug 2022–May 2024)."
+        return "He earned his Master’s in Computer Science from Wichita State University (Aug 2022 – May 2024)."
     if "bachelor" in q:
-        return "Bachelor’s in Engineering (CS) in 2018 with early Python/OpenCV projects."
+        return "Bachelor’s in Computer Science with early experience in Python and data projects."
     if any(w in q for w in ["certification", "certified"]):
         return (
-            "Certifications include: AWS Developer Associate, Microsoft Power BI, "
-            "Oracle Certified Professional, and Java Certified Programmer."
+            "Certifications include:\n"
+            "- AWS Certified Developer – Associate\n"
+            "- Microsoft Power BI Data Analyst\n"
+            "- Linux Server Management and Security"
         )
     return None
 
 def handle_projects(q: str) -> Optional[str]:
-    if "loan" in q or "management system" in q:
-        return (
-            "At Comcast, I developed a scalable Loan Management System using Spring Boot, ReactJS, and AWS Lambda, "
-            "reducing processing time by 25%."
-        )
-    if any(w in q for w in ["face recognition", "raspberry pi"]):
-        return "Developed a Pi-based face-recognition system using OpenCV (2018)."
+    if "wordpress" in q or "plugin" in q:
+        return "Bharat has built and maintained custom WordPress plugins and themes, integrating with APIs and ensuring WCAG 2.1 accessibility."
+    if "employee" in q or "scheduling" in q:
+        return "He developed a scheduling and reporting app to track employee clock-ins, schedules, and performance metrics."
     return None
 
 def handle_volunteer(q: str) -> Optional[str]:
-    if any(w in q for w in ["guinness", "wheelchair"]):
-        return "Coordinated a Guinness World Record wheelchair event at Vel Tech (May 2019)."
-    return None
+    return None  # No specific volunteer experience mentioned in the resume
 
 def handle_behavioral(q: str) -> Optional[str]:
     if any(w in q for w in ["tell me about a time", "example of", "how did you"]):
-        return "Sure—want a system optimization story or a leadership example from my time at JPMorgan?"
+        return (
+            "Sure—Bharat once optimized a reporting tool that improved query efficiency by 30% "
+            "using MySQL tuning and modular backend refactoring at Agile Adroit."
+        )
     return None
 
 # --- Main response function ---
 def get_response(user_input: str) -> str:
     q = user_input.lower()
-    for fn in [handle_fun, handle_recruiter, handle_company,
-               handle_tech, handle_education, handle_projects,
-               handle_volunteer, handle_behavioral]:
+    for fn in [
+        handle_fun, handle_recruiter, handle_company,
+        handle_tech, handle_education, handle_projects,
+        handle_volunteer, handle_behavioral
+    ]:
         resp = fn(q)
         if resp:
             return resp
