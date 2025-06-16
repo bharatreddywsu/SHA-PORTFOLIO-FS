@@ -23,10 +23,10 @@ load_dotenv()
 OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Avatar (disabled until a valid image is provided)
+# Avatar (optional)
 # ─────────────────────────────────────────────────────────────────────────────
 def show_avatar():
-    file_path = "bharat.png"  # <- Update this if/when you upload an actual image
+    file_path = "bharat.png"
     if os.path.exists(file_path):
         with open(file_path, "rb") as f:
             encoded = base64.b64encode(f.read()).decode()
@@ -38,7 +38,7 @@ def show_avatar():
         </div>
         """, unsafe_allow_html=True)
 
-show_avatar()  # Safe to call even if no image
+show_avatar()
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Styling
@@ -68,9 +68,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Build vector store if missing
+# Build vector store
 # ─────────────────────────────────────────────────────────────────────────────
-resume_path = "resume/Bharat FS.pdf"
+resume_path = "knowledge_base/Bharat_FS.pdf"
 vector_store_path = "sha_vector_store"
 
 if not os.path.exists(vector_store_path):
@@ -93,7 +93,7 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Response Handlers
+# Handlers
 # ─────────────────────────────────────────────────────────────────────────────
 def handle_fun(q):
     if "food" in q:
@@ -119,7 +119,7 @@ def handle_education(q):
     return None
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Chat UI
+# Main UI
 # ─────────────────────────────────────────────────────────────────────────────
 if "miss_count" not in st.session_state:
     st.session_state["miss_count"] = 0
