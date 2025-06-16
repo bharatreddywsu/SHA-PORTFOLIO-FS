@@ -23,7 +23,7 @@ load_dotenv()
 OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Avatar (optional)
+# Optional avatar
 # ─────────────────────────────────────────────────────────────────────────────
 def show_avatar():
     file_path = "bharat.png"
@@ -68,7 +68,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Build vector store
+# Build or load vector store
 # ─────────────────────────────────────────────────────────────────────────────
 resume_path = "knowledge_base/resume/Bharat_FS.pdf"
 vector_store_path = "sha_vector_store"
@@ -93,16 +93,16 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Handlers
+# Custom handlers
 # ─────────────────────────────────────────────────────────────────────────────
-def handle_fun(q):
+def handle_fun(q: str):
     if "food" in q:
         return "Bharat runs on Java, JSON, and weekend biryani—strictly in that order."
     if "hobby" in q or "weekend" in q:
         return "He codes side projects with Spring Boot & React, reads cloud architecture blogs, and loves tech memes."
     return None
 
-def handle_company(q):
+def handle_company(q: str):
     if "comcast" in q or "current" in q or "working" in q:
         return "Bharat is currently working at Comcast as a Full Stack Developer (since June 2024)."
     if "jpmorgan" in q or "jpmc" in q:
@@ -111,7 +111,7 @@ def handle_company(q):
         return "He modernized healthcare apps at Dentsu using Spring Boot and Angular, deployed on Azure."
     return None
 
-def handle_education(q):
+def handle_education(q: str):
     if "master" in q:
         return "He completed his Master’s in CS from Wichita State University (Aug 2022–May 2024)."
     if "certification" in q:
@@ -129,12 +129,14 @@ user_input = st.text_input("Your Question:", key="main_input")
 
 if user_input:
     q = user_input.lower()
-    for fn in [handle_fun, handle_company, handle_education]:
-        response = fn(q)
-        if response:
-            st.markdown(f"**SHA:** {response}")
+    # Try custom handlers first
+    for fn in (handle_fun, handle_company, handle_education):
+        resp = fn(q)
+        if resp:
+            st.markdown(f"**SHA:** {resp}")
             break
     else:
+        # Fallback to RAG
         docs = store.as_retriever().get_relevant_documents(user_input)
         if not docs:
             st.session_state["miss_count"] += 1
@@ -150,6 +152,7 @@ if user_input:
                 answer = qa_chain.run(user_input)
             st.markdown(f"**SHA:** {answer}")
 
+    # Feedback
     st.markdown("#### Was this helpful?")
     col1, col2 = st.columns(2)
     if col1.button("👍"):
