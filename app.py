@@ -70,7 +70,7 @@ st.markdown("""
 # ─────────────────────────────────────────────────────────────────────────────
 # Build vector store
 # ─────────────────────────────────────────────────────────────────────────────
-resume_path = "knowledge_base/Bharat_FS.pdf"
+resume_path = "knowledge_base/resume/Bharat_FS.pdf"
 vector_store_path = "sha_vector_store"
 
 if not os.path.exists(vector_store_path):
