@@ -3,7 +3,10 @@ import streamlit as st
 import base64
 from dotenv import load_dotenv
 
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+# Use the existing embeddings & chat models until you upgrade your environment
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain.chat_models import ChatOpenAI
+
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain_community.document_loaders import PyPDFLoader
@@ -70,8 +73,8 @@ if not os.path.exists(vector_store_path):
     pages      = loader.load()
     splitter   = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     docs       = splitter.split_documents(pages)
-    embeds     = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-    FAISS.from_documents(docs, embeds).save_local(vector_store_path)
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+    FAISS.from_documents(docs, embeddings).save_local(vector_store_path)
 
 store    = FAISS.load_local(
     vector_store_path,
@@ -128,7 +131,6 @@ if user_input:
             st.markdown(f"**SHA:** {resp}")
             break
     else:
-        # Fallback to RAG
         docs = store.as_retriever().get_relevant_documents(user_input)
         if not docs:
             st.session_state["miss_count"] += 1
